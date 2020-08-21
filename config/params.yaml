@@ -36,19 +36,13 @@ lio_sam:
   imuGravity: 9.80511
 
   # Extrinsics (lidar -> IMU)
-  extrinsicTrans: [0.0, 0.0, 0.0]
-  extrinsicRot: [-1, 0, 0,
-                  0, 1, 0,
-                  0, 0, -1]
-  extrinsicRPY: [0,  1, 0,
-                 -1, 0, 0,
-                  0, 0, 1]
-  # extrinsicRot: [1, 0, 0,
-  #                 0, 1, 0,
-  #                 0, 0, 1]
-  # extrinsicRPY: [1, 0, 0,
-  #                 0, 1, 0,
-  #                 0, 0, 1]
+  extrinsicTrans: [0.0, 0.0, 0.0492]
+  extrinsicRot: [  0.9995409,  0.0000000,  0.0302978,
+  -0.0005348,  0.9998442,  0.0176450,
+  -0.0302930, -0.0176531,  0.9993852 ]
+  extrinsicRPY: [  0.9995409,  0.0000000,  0.0302978,
+  -0.0005348,  0.9998442,  0.0176450,
+  -0.0302930, -0.0176531,  0.9993852 ]
 
   # LOAM feature threshold
   edgeThreshold: 1.0
