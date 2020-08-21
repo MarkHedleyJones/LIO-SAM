@@ -52,8 +52,8 @@ lio_sam:
 
   # voxel filter paprams
   odometrySurfLeafSize: 0.4                     # default: 0.4
-  mappingCornerLeafSize: 0.2                    # default: 0.2
-  mappingSurfLeafSize: 0.4                      # default: 0.4
+  mappingCornerLeafSize: 0.1                   # default: 0.2
+  mappingSurfLeafSize: 0.1                     # default: 0.4
 
   # robot motion constraint (in case you are using a 2D robot)
   z_tollerance: 1000                            # meters
