@@ -27,7 +27,7 @@ public:
     pcl::PointCloud<PointType>::Ptr cornerCloud;
     pcl::PointCloud<PointType>::Ptr surfaceCloud;
 
-    pcl::VoxelGrid<PointType> downSizeFilter;
+    pcl::VoxelGridLarge<PointType> downSizeFilter;
 
     lio_sam::cloud_info cloudInfo;
     std_msgs::Header cloudHeader;
