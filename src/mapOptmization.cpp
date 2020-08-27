@@ -360,8 +360,8 @@ public:
         cout << "****************************************************" << endl;
         cout << "Saving map to pcd files ..." << endl;
         // create directory and remove old files;
-        savePCDDirectory = std::getenv("HOME") + savePCDDirectory;
-        int unused = system((std::string("exec rm -r ") + savePCDDirectory).c_str());
+        // savePCDDirectory = std::getenv("HOME") + savePCDDirectory;
+        // int unused = system((std::string("exec rm -r ") + savePCDDirectory).c_str());
         unused = system((std::string("mkdir ") + savePCDDirectory).c_str());
         // save key frame transformations
         pcl::io::savePCDFileASCII(savePCDDirectory + "trajectory.pcd", *cloudKeyPoses3D);
