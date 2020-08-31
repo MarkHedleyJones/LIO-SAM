@@ -362,7 +362,7 @@ public:
         // create directory and remove old files;
         // savePCDDirectory = std::getenv("HOME") + savePCDDirectory;
         // int unused = system((std::string("exec rm -r ") + savePCDDirectory).c_str());
-        unused = system((std::string("mkdir ") + savePCDDirectory).c_str());
+        int unused = system((std::string("mkdir ") + savePCDDirectory).c_str());
         // save key frame transformations
         pcl::io::savePCDFileASCII(savePCDDirectory + "trajectory.pcd", *cloudKeyPoses3D);
         pcl::io::savePCDFileASCII(savePCDDirectory + "transformations.pcd", *cloudKeyPoses6D);
