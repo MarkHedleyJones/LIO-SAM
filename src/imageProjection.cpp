@@ -11,10 +11,29 @@ struct PointXYZIRT
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 } EIGEN_ALIGN16;
 
-POINT_CLOUD_REGISTER_POINT_STRUCT (PointXYZIRT,  
+POINT_CLOUD_REGISTER_POINT_STRUCT (PointXYZIRT,
     (float, x, x) (float, y, y) (float, z, z) (float, intensity, intensity)
     (uint16_t, ring, ring) (float, time, time)
 )
+
+std::vector<double> acc_x;
+std::vector<double> acc_y;
+std::vector<double> acc_z;
+std::vector<double> gyr_x;
+std::vector<double> gyr_y;
+std::vector<double> gyr_z;
+std::vector<double> imu_roll;
+std::vector<double> imu_pitch;
+std::vector<double> imu_yaw;
+
+double vector_avg(std::vector<double> &v) {
+    double out=0.0;
+    int the_size = v.size();
+    for (int i=0; i < the_size; ++i) {
+        out += v[i];
+    }
+    return out / the_size;
+}
 
 // Ouster
 // struct PointXYZIRT {
@@ -149,21 +168,55 @@ public:
         imuQueue.push_back(thisImu);
 
         // debug IMU data
+        double imuRoll, imuPitch, imuYaw;
+        tf::Quaternion orientation;
+        tf::quaternionMsgToTF(thisImu.orientation, orientation);
+        tf::Matrix3x3(orientation).getRPY(imuRoll, imuPitch, imuYaw);
+
+        // acc_x.push_back(thisImu.linear_acceleration.x);
+        // acc_y.push_back(thisImu.linear_acceleration.y);
+        // acc_z.push_back(thisImu.linear_acceleration.z);
+        // gyr_x.push_back(thisImu.angular_velocity.x);
+        // gyr_y.push_back(thisImu.angular_velocity.y);
+        // gyr_z.push_back(thisImu.angular_velocity.z);
+        // imu_roll.push_back(imuRoll);
+        // imu_pitch.push_back(imuPitch);
+        // imu_yaw.push_back(imuYaw);
+
         // cout << std::setprecision(6);
         // cout << "IMU acc: " << endl;
-        // cout << "x: " << thisImu.linear_acceleration.x << 
-        //       ", y: " << thisImu.linear_acceleration.y << 
-        //       ", z: " << thisImu.linear_acceleration.z << endl;
+        // cout << "x: " << vector_avg(acc_x) << endl;
+        // cout << "y: " << vector_avg(acc_y) << endl;
+        // cout << "z: " << vector_avg(acc_z) << endl;
+        // cout << vector_avg(acc_x) + vector_avg(acc_y) << endl;
         // cout << "IMU gyro: " << endl;
-        // cout << "x: " << thisImu.angular_velocity.x << 
-        //       ", y: " << thisImu.angular_velocity.y << 
-        //       ", z: " << thisImu.angular_velocity.z << endl;
+        // cout << "x: " << vector_avg(gyr_x) << endl;
+        // cout << "y: " << vector_avg(gyr_y) << endl;
+        // cout << "z: " << vector_avg(gyr_z) << endl;
+        // cout << "IMU roll pitch yaw: " << endl;
+        // cout << "roll:  " << vector_avg(imu_roll) << endl;
+        // cout << "pitch: " << vector_avg(imu_pitch) << endl;
+        // cout << "yaw:   " << vector_avg(imu_yaw) << endl << endl;
+
+        // cout << std::setprecision(6);
+        // cout << "IMU acc: " << endl;
+        // cout << "x: " << thisImu.linear_acceleration.x << endl;
+        // cout << "y: " << thisImu.linear_acceleration.y << endl;
+        // cout << "z: " << thisImu.linear_acceleration.z << endl;
+        // cout << "IMU gyro: " << endl;
+        // cout << "x: " << thisImu.angular_velocity.x << endl;
+        // cout << "y: " << thisImu.angular_velocity.y << endl;
+        // cout << "z: " << thisImu.angular_velocity.z << endl;
         // double imuRoll, imuPitch, imuYaw;
         // tf::Quaternion orientation;
         // tf::quaternionMsgToTF(thisImu.orientation, orientation);
         // tf::Matrix3x3(orientation).getRPY(imuRoll, imuPitch, imuYaw);
         // cout << "IMU roll pitch yaw: " << endl;
-        // cout << "roll: " << imuRoll << ", pitch: " << imuPitch << ", yaw: " << imuYaw << endl << endl;
+        // cout << "roll: " << imuRoll << endl;
+        // cout << "pitch: " << imuPitch << endl;
+        // cout << "yaw: " << imuYaw << endl << endl;
+
+
     }
 
     void odometryHandler(const nav_msgs::Odometry::ConstPtr& odometryMsg)
